@@ -7,7 +7,8 @@ public class StacjaKontroliPojazdow {
         this.nazwaStacji = nazwaStacji;
         db = new BazaDanych();
     }
-    public BazaDanych getDb(){
+    public BazaDanych getDb()
+    {
         return db;
     }
 
