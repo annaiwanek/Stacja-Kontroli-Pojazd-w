@@ -1,17 +1,22 @@
+package model;
+
 import java.sql.SQLOutput;
 
-public class Pojazd {
+public abstract class Pojazd {
     private String numerDowoduRejestracyjnego;
     private String numerRejestracyjny;
     private String marka;
-    private String typ;
     private String model;
+    private TypPojazdu typ;
     private int rokProdukcji;
-    private String kategoria;
+    private KategoriaPojazdu kategoria;
     private long przebieg;
 
-    public Pojazd (String numerDowoduRejestracyjnego, String numerRejestracyjny, String marka, String typ, String model,
-                   int rokProdukcji, String kategoria, long przebieg)
+    public Pojazd(){
+    }
+
+    public Pojazd (String numerDowoduRejestracyjnego, String numerRejestracyjny, String marka, String model, TypPojazdu typ,
+                   KategoriaPojazdu kategoria, int rokProdukcji, long przebieg)
     {
         this.numerDowoduRejestracyjnego = numerDowoduRejestracyjnego;
         this.numerRejestracyjny = numerRejestracyjny;
@@ -22,6 +27,9 @@ public class Pojazd {
         this.kategoria = kategoria;
         this.przebieg = przebieg;
     }
+    public abstract Pojazd stworzPojazd();
+
+    // gettery
     public String getNumerDowoduRejestracyjnego()
     {
         return numerDowoduRejestracyjnego;
@@ -34,7 +42,7 @@ public class Pojazd {
     {
         return marka;
     }
-    public String getTyp()
+    public TypPojazdu getTyp()
     {
         return typ;
     }
@@ -42,21 +50,18 @@ public class Pojazd {
     {
         return model;
     }
-    public int getRokProdukcji()
-    {
+    public int getRokProdukcji(){
         return rokProdukcji;
     }
-    public String getKategoria()
-    {
+    public KategoriaPojazdu getKategoria(){
         return kategoria;
-
     }
     public long getPrzebieg() {
         return przebieg;
     }
 
-    public void setNumerDowoduRejestracyjnego(String numerDowoduRejestracyjnego)
-    {
+    // settery
+    public void setNumerDowoduRejestracyjnego(String numerDowoduRejestracyjnego){
         this.numerDowoduRejestracyjnego = numerDowoduRejestracyjnego;
     }
 
@@ -70,7 +75,7 @@ public class Pojazd {
         this.marka = marka;
     }
 
-    public void setTyp(String typ)
+    public void setTyp(TypPojazdu typ)
     {
         this.typ = typ;
     }
@@ -85,7 +90,7 @@ public class Pojazd {
         this.rokProdukcji = rokProdukcji;
     }
 
-    public void setKategoria(String kategoria)
+    public void setKategoria(KategoriaPojazdu kategoria)
     {
         this.kategoria = kategoria;
     }
@@ -93,19 +98,6 @@ public class Pojazd {
     public void setPrzebieg(long przebieg) {
         this.przebieg = przebieg;
     }
-
-//    public void drukuj()
-//    {
-//       System.out.println("DANE POJAZDU: ");
-//        System.out.println("1. Numer dowodu rejestracyjnego: " + numerDowoduRejestracyjnego);
-//        System.out.println("2. Numer rejestracyjny: " + numerRejestracyjny);
-//        System.out.println("3. Marka: " + marka);
-//        System.out.println("4. Typ: " + typ);
-//        System.out.println("5. Model: " + model);
-//        System.out.println("6. Rok produkcji: " + rokProdukcji);
-//        System.out.println("7. Kategoria: " + kategoria);
-//        System.out.println();
-//    }
 
     @Override
     public String toString()

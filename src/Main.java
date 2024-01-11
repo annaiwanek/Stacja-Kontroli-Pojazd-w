@@ -1,5 +1,3 @@
-import java.time.LocalDate;
-import java.util.Random;
 import java.util.Scanner;
 
 
@@ -8,9 +6,6 @@ public class Main {
     {
         System.out.println("Projekt zaliczeniowy");
         System.out.println();
-
-        StacjaKontroliPojazdow stacjaKontroliPojazdow = new StacjaKontroliPojazdow("Stacja Kontroli Pojazdów Koszalin");
-
         System.out.println("STACJA KONTROLI POJAZDÓW");
         System.out.println();
 

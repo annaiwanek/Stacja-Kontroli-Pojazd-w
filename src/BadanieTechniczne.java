@@ -1,6 +1,6 @@
+import model.Pojazd;
+
 import java.time.LocalDate;
-
-
 
 public class BadanieTechniczne {
     private final int idBadania;
@@ -23,16 +23,6 @@ public class BadanieTechniczne {
     public int getIdBadania() {
         return idBadania;
     }
-
-//  public void drukujRaport()
-//    {
-//        System.out.println("RAPORT Z BADANIA TECHNICZNEGO");
-//        System.out.println("Id badania: " + idBadania);
-//        System.out.println("Pojazd: " + pojazd);
-//        System.out.println("Data badania: " + dataBadania);
-//        System.out.println();
-//
-//    }
 
     @Override
     public String toString() {

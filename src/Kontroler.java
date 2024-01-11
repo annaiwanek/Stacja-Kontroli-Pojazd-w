@@ -1,52 +1,82 @@
+import model.*;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Kontroler
-{
+public class Kontroler {
     public static final int MAX_ID = 5000;
     private final BazaDanych bazaDanych;
     Scanner scanner = new Scanner(System.in);
 
-    public Kontroler(BazaDanych bazaDanych)
-    {
+    public Kontroler(BazaDanych bazaDanych) {
         this.bazaDanych = bazaDanych;
     }
 
-    public void dodajBadanie()
-    {
+    public void dodajBadanie() {
         System.out.println("Dodaj nowy pojazd.");
 
         System.out.println();
 
-        System.out.println("Wprowadź numer dowodu rejestracyjnego: ");
-        String numerDowoduRejestracyjnego = scanner.nextLine();
+        Pojazd pojazd = null;
 
-        System.out.println("Wprowadź numer rejestracyjny: ");
-        String numerRejestracyjny = scanner.nextLine();
+        System.out.println("Wybierz typ pojazdu: ");
+        System.out.println("1. Motor.");
+        System.out.println("2. Samochód osobowy.");
+        System.out.println("3. Autobus.");
+        System.out.println("4. Samochód dostawczy.");
+        System.out.println("5. Samochód ciężarowy.");
+        System.out.println("6. Ciągnik rolniczy.");
+        System.out.println("7. Wyjdź.");
 
-        System.out.println("Wprowadź markę pojazdu: ");
-        String marka = scanner.nextLine();
+        int userChoice = scanner.nextInt();
+        scanner.nextLine();
 
-        System.out.println("Wprowadź typ pojazdu: ");
-        String typ = scanner.nextLine();
+        switch (userChoice) {
+            case 1 -> pojazd = new Motor().stworzPojazd();
+            case 2 -> pojazd = new SamochodOsobowy().stworzPojazd();
+            case 3 -> pojazd = new Autobus().stworzPojazd();
+            case 4 -> pojazd = new SamochodDostawczy().stworzPojazd();
+            case 5 -> pojazd = new SamochodCiezarowy().stworzPojazd();
+            case 6 -> pojazd = new CiagnikRolniczy().stworzPojazd();
+            case 7 -> {
+                System.out.println("Nie wybrano pojazdu!");
+                return;
 
-        System.out.println("Wprowadź model pojazdu: ");
-        String model = scanner.nextLine();
+            }
 
-        System.out.println("Wprowadź rok produkcji: ");
-        int rokProdukcji = Integer.valueOf(scanner.nextLine());
-
-        System.out.println("Wprowadź kategorię pojazdu: ");
-        String kategoria = scanner.nextLine();
-
-        System.out.println("Wprowadź przebieg pojazdu: ");
-        long przebieg = scanner.nextLong();
+        }
 
 
-        Pojazd pojazd = new Pojazd(numerDowoduRejestracyjnego, numerRejestracyjny, marka, typ, model, rokProdukcji, kategoria, przebieg);
-        BadanieTechniczne badanieTechniczne = new BadanieTechniczne(new Random().nextInt(MAX_ID),pojazd, LocalDate.now());
+//        System.out.println("Wprowadź numer dowodu rejestracyjnego: ");
+//        String numerDowoduRejestracyjnego = scanner.nextLine();
+//
+//        System.out.println("Wprowadź numer rejestracyjny: ");
+//        String numerRejestracyjny = scanner.nextLine();
+//
+//        System.out.println("Wprowadź markę pojazdu: ");
+//        String marka = scanner.nextLine();
+//
+//        System.out.println("Wprowadź typ pojazdu: ");
+//        String typ = scanner.nextLine();
+//
+//        System.out.println("Wprowadź model pojazdu: ");
+//        String model = scanner.nextLine();
+//
+//        System.out.println("Wprowadź rok produkcji: ");
+//        int rokProdukcji = Integer.valueOf(scanner.nextLine());
+//
+//        System.out.println("Wprowadź kategorię pojazdu: ");
+//        String kategoria = scanner.nextLine();
+//
+//        System.out.println("Wprowadź przebieg pojazdu: ");
+//        long przebieg = scanner.nextLong();
+
+
+        //Pojazd pojazd = new Pojazd (numerDowoduRejestracyjnego, numerRejestracyjny, marka, model, typ, kategoria, rokProdukcji, przebieg)
+
+        BadanieTechniczne badanieTechniczne = new BadanieTechniczne(new Random().nextInt(MAX_ID), pojazd, LocalDate.now());
 
         bazaDanych.dodajBadanie(badanieTechniczne);
 
@@ -54,8 +84,8 @@ public class Kontroler
         System.out.println(badanieTechniczne);
 
     }
-    public void aktualizujBadanie()
-    {
+
+    public void aktualizujBadanie() {
         System.out.println("Aktualizuj badanie");
         System.out.println("Wprowadź nr tablicy rejestracyjnej: ");
         String numerRejestracyjny = scanner.nextLine();
@@ -64,7 +94,7 @@ public class Kontroler
         System.out.println("Badania Techniczne: ");
         System.out.println(badaniaTechniczne);
 
-        if (badaniaTechniczne.isEmpty()){
+        if (badaniaTechniczne.isEmpty()) {
             System.out.println("Nie znaleziono żadnych badań.");
             return;
         }
@@ -75,7 +105,7 @@ public class Kontroler
 
         BadanieTechniczne istniejaceBadanie = bazaDanych.znajdzBadania(numerRejestracyjny, id);
 
-        if (istniejaceBadanie == null){
+        if (istniejaceBadanie == null) {
             System.out.println("Nie znaleziono badania.");
             return;
         }
@@ -89,8 +119,7 @@ public class Kontroler
 
     }
 
-    public void wyszukajBadanie()
-    {
+    public void wyszukajBadanie() {
         System.out.println("Wprowadź nr tablicy rejestracyjnej: ");
         String numerRejestracyjny = scanner.nextLine();
 
@@ -98,8 +127,7 @@ public class Kontroler
         System.out.println("Badania Techniczne" + badanieTechniczne);
     }
 
-    public void usunBadanie()
-    {
+    public void usunBadanie() {
         System.out.println("Wprowadź nr tablicy rejestracyjnej: ");
         String numerRejestracyjny = scanner.nextLine();
 
@@ -114,26 +142,24 @@ public class Kontroler
 
     }
 
-    private BadanieTechniczne aktualizujPola(BadanieTechniczne aktualneBadanie){
+    private BadanieTechniczne aktualizujPola(BadanieTechniczne aktualneBadanie) {
         boolean shouldContinue = true;
 
-        while (shouldContinue)
-        {
+        while (shouldContinue) {
             System.out.println("Wybierz opcję: ");
             System.out.println("1. Zmień nr dowodu rejestracyjnego.");
             System.out.println("2. Zmień markę pojazdu.");
-            System.out.println("3. Zmień typ pojazdu.");
-            System.out.println("4. Zmień model pojazdu.");
-            System.out.println("5. Zmień rok produkcji.");
-            System.out.println("6. Zmień kategorię pojazdu.");
-            System.out.println("7. Zmień przebieg.");
-            System.out.println("8. Zakończ aktualizację.");
+            //System.out.println("3. Zmień typ pojazdu.");
+            System.out.println("3. Zmień model pojazdu.");
+            System.out.println("4. Zmień rok produkcji.");
+            //System.out.println("6. Zmień kategorię pojazdu.");
+            System.out.println("5. Zmień przebieg.");
+            System.out.println("6. Zakończ aktualizację.");
 
             int userChoice = scanner.nextInt();
             scanner.nextLine();
 
-            switch (userChoice)
-            {
+            switch (userChoice) {
                 case 1 -> {
                     System.out.println("Zmień nr dowodu rejestracyjnego: ");
                     String nowyNumerDowoduRejestracyjnego = scanner.nextLine();
@@ -144,43 +170,38 @@ public class Kontroler
                     String nowaMarka = scanner.nextLine();
                     aktualneBadanie.getPojazd().setMarka(nowaMarka);
                 }
+//                case 3 -> {
+//                    System.out.println("Zmień typ pojazdu: ");
+//                    TypPojazdu nowyTyp = TypPojazdu.valueOf(scanner.nextLine());
+//                    aktualneBadanie.getPojazd().setTyp(nowyTyp);
+//                }
                 case 3 -> {
-                    System.out.println("Zmień typ pojazdu: ");
-                    String nowyTyp = scanner.nextLine();
-                    aktualneBadanie.getPojazd().setTyp(nowyTyp);
-                }
-                case 4 -> {
                     System.out.println("Zmień model pojazdu: ");
                     String nowyModel = scanner.nextLine();
                     aktualneBadanie.getPojazd().setModel(nowyModel);
                 }
-                case 5 -> {
+                case 4 -> {
                     System.out.println("Zmień rok produkcji: ");
                     int nowyRokProdukcji = Integer.valueOf(scanner.nextLine());
                     aktualneBadanie.getPojazd().setRokProdukcji(nowyRokProdukcji);
                 }
-                case 6 -> {
-                    System.out.println("Zmień kategorię pojazdu: ");
-                    String nowaKategoria = scanner.nextLine();
-                    aktualneBadanie.getPojazd().setKategoria(nowaKategoria);
-                }
-                case 7 -> {
+//                case 6 -> {
+//                    System.out.println("Zmień kategorię pojazdu: ");
+//                    KategoriaPojazdu nowaKategoria = KategoriaPojazdu.valueOf(scanner.nextLine());
+//                    aktualneBadanie.getPojazd().setKategoria(nowaKategoria);
+//                }
+                case 5 -> {
                     System.out.println("Zmień przebieg: ");
                     long nowyPrzebieg = scanner.nextLong();
                     aktualneBadanie.getPojazd().setPrzebieg(nowyPrzebieg);
                 }
-                case 8 -> shouldContinue = false;
+                case 6 -> shouldContinue = false;
 
             }
         }
         return aktualneBadanie;
 
     }
-
-
-
-
-
 
 
 }
