@@ -1,4 +1,6 @@
-import model.Pojazd;
+package com.myproject.stacja.kontroli.model;
+
+import com.myproject.stacja.kontroli.pojazdy.Pojazd;
 
 import java.time.LocalDate;
 
@@ -8,8 +10,7 @@ public class BadanieTechniczne {
     private final LocalDate dataBadania;
 
 
-    public BadanieTechniczne (int idBadania, Pojazd pojazd, LocalDate dataBadania)
-    {
+    public BadanieTechniczne(int idBadania, Pojazd pojazd, LocalDate dataBadania) {
         this.idBadania = idBadania;
         this.pojazd = pojazd;
         this.dataBadania = dataBadania;

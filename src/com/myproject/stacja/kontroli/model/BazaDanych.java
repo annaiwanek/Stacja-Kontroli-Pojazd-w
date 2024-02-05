@@ -1,3 +1,5 @@
+package com.myproject.stacja.kontroli.model;
+
 import java.util.*;
 
 public class BazaDanych
