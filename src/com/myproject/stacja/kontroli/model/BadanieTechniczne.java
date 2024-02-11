@@ -1,20 +1,16 @@
 package com.myproject.stacja.kontroli.model;
-
-import com.myproject.stacja.kontroli.pojazdy.Pojazd;
-
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class BadanieTechniczne {
+public class BadanieTechniczne implements Serializable {
     private final int idBadania;
     private final Pojazd pojazd;
     private final LocalDate dataBadania;
-
 
     public BadanieTechniczne(int idBadania, Pojazd pojazd, LocalDate dataBadania) {
         this.idBadania = idBadania;
         this.pojazd = pojazd;
         this.dataBadania = dataBadania;
-
     }
 
     public Pojazd getPojazd() {

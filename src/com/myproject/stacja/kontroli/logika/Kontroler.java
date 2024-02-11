@@ -1,10 +1,8 @@
 package com.myproject.stacja.kontroli.logika;
 
-import com.myproject.stacja.kontroli.model.BadanieTechniczne;
-import com.myproject.stacja.kontroli.model.BazaDanych;
-import com.myproject.stacja.kontroli.pojazdy.*;
+import com.myproject.stacja.kontroli.baza.BazaDanych;
+import com.myproject.stacja.kontroli.model.*;
 import com.myproject.stacja.kontroli.input.DostawcaDanychWejsciowychUzytkownika;
-
 
 import java.time.LocalDate;
 import java.util.List;
@@ -25,35 +23,11 @@ public class Kontroler {
 
         System.out.println();
 
-        Pojazd pojazd = null;
-
-        System.out.println("Wybierz typ pojazdu: ");
-        System.out.println("1. Motor.");
-        System.out.println("2. Samochód osobowy.");
-        System.out.println("3. Autobus.");
-        System.out.println("4. Samochód dostawczy.");
-        System.out.println("5. Samochód ciężarowy.");
-        System.out.println("6. Ciągnik rolniczy.");
-        System.out.println("7. Wyjdź.");
-
-        int userChoice = userImput.pobierzInt();
-
-        switch (userChoice) {
-            case 1 -> pojazd = new Motor().stworzPojazd();
-            case 2 -> pojazd = new SamochodOsobowy().stworzPojazd();
-            case 3 -> pojazd = new Autobus().stworzPojazd();
-            case 4 -> pojazd = new SamochodDostawczy().stworzPojazd();
-            case 5 -> pojazd = new SamochodCiezarowy().stworzPojazd();
-            case 6 -> pojazd = new CiagnikRolniczy().stworzPojazd();
-            case 7 -> {
-                return;
-            }
-            default -> {
-                System.out.println("Niepoprawny wybór. Operacja dodawania badania przerwana.");
-                return;
-            }
-
+        Pojazd pojazd = pobierzTypPojazdu();
+        if (pojazd == null) {
+            return;
         }
+
         BadanieTechniczne badanieTechniczne = new BadanieTechniczne(new Random().nextInt(MAX_ID), pojazd, LocalDate.now());
         bazaDanych.dodajBadanie(badanieTechniczne);
         System.out.println("Dodano nowe badanie!");
@@ -64,10 +38,6 @@ public class Kontroler {
         System.out.println("Aktualizuj badanie");
         System.out.println("Wprowadź nr tablicy rejestracyjnej: ");
         String numerRejestracyjny = userImput.wprowadzTekst();
-//
-//        List<BadanieTechniczne> badaniaTechniczne = bazaDanych.znajdzBadania(numerRejestracyjny);
-//        System.out.println("Badania Techniczne: ");
-//        System.out.println(badaniaTechniczne);
 
         boolean dostepneBadania = sprawdzIwyswietlBadania(numerRejestracyjny);
 
@@ -85,9 +55,9 @@ public class Kontroler {
             return;
         }
 
-        istniejaceBadanie = aktualizujPola(istniejaceBadanie);
+        BadanieTechniczne zaktualizowaneBadanie = aktualizujPola(istniejaceBadanie);
 
-        bazaDanych.aktualizujBadanie(numerRejestracyjny, id, istniejaceBadanie);
+        bazaDanych.aktualizujBadanie(numerRejestracyjny, id, zaktualizowaneBadanie);
 
         System.out.println("Badanie zaktualizowano!");
     }
@@ -96,8 +66,8 @@ public class Kontroler {
         System.out.println("Wprowadź nr tablicy rejestracyjnej: ");
         String numerRejestracyjny = userImput.wprowadzTekst();
 
-        List<BadanieTechniczne> badanieTechniczne = bazaDanych.znajdzBadania(numerRejestracyjny);
-        System.out.println("Badania Techniczne" + badanieTechniczne);
+        System.out.println("Badania Techniczne:");
+        sprawdzIwyswietlBadania(numerRejestracyjny);
     }
 
     public void usunBadanie() {
@@ -105,13 +75,12 @@ public class Kontroler {
         String numerRejestracyjny = userImput.wprowadzTekst();
 
         List<BadanieTechniczne> badanieTechniczne = bazaDanych.znajdzBadania(numerRejestracyjny);
-        System.out.println("Badania Techniczne" + badanieTechniczne);
+        System.out.println("Badanie Techniczne" + badanieTechniczne);
 
         System.out.println("Wprowadź id badania: ");
         int id = userImput.pobierzInt();
 
         bazaDanych.usunBadanie(numerRejestracyjny, id);
-
     }
 
     private BadanieTechniczne aktualizujPola(BadanieTechniczne aktualneBadanie) {
@@ -155,6 +124,47 @@ public class Kontroler {
                 System.out.println(badanieTechniczne);
             }
             return true;
+        }
+    }
+
+    private Pojazd pobierzTypPojazdu() {
+        System.out.println("Wybierz typ pojazdu: ");
+        System.out.println("1. Motor.");
+        System.out.println("2. Samochód osobowy.");
+        System.out.println("3. Autobus.");
+        System.out.println("4. Samochód dostawczy.");
+        System.out.println("5. Samochód ciężarowy.");
+        System.out.println("6. Ciągnik rolniczy.");
+        System.out.println("7. Wyjdź.");
+
+        int userChoice = userImput.pobierzInt();
+
+        switch (userChoice) {
+            case 1 -> {
+                return new Motor().stworzPojazd();
+            }
+            case 2 -> {
+                return new SamochodOsobowy().stworzPojazd();
+            }
+            case 3 -> {
+                return new Autobus().stworzPojazd();
+            }
+            case 4 -> {
+                return new SamochodDostawczy().stworzPojazd();
+            }
+            case 5 -> {
+                return new SamochodCiezarowy().stworzPojazd();
+            }
+            case 6 -> {
+                return new CiagnikRolniczy().stworzPojazd();
+            }
+            case 7 -> {
+                return null;
+            }
+            default -> {
+                System.out.println("Niepoprawny wybór. Operacja dodawania badania przerwana.");
+                return null;
+            }
         }
     }
 }

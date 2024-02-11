@@ -1,4 +1,4 @@
-package com.myproject.stacja.kontroli.pojazdy;
+package com.myproject.stacja.kontroli.model;
 
 public class CiagnikRolniczy extends Pojazd {
 
@@ -7,5 +7,4 @@ public class CiagnikRolniczy extends Pojazd {
         setTyp(TypPojazdu.CIAGNIK_ROLNICZY);
         setKategoria(KategoriaPojazdu.B);
     }
-
 }

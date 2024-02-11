@@ -1,4 +1,4 @@
-package com.myproject.stacja.kontroli.pojazdy;
+package com.myproject.stacja.kontroli.model;
 
 public class Autobus extends Pojazd {
 
@@ -7,5 +7,4 @@ public class Autobus extends Pojazd {
         setTyp(TypPojazdu.AUTOBUS);
         setKategoria(KategoriaPojazdu.D);
     }
-
 }

@@ -1,4 +1,4 @@
-import com.myproject.stacja.kontroli.model.BazaDanych;
+import com.myproject.stacja.kontroli.baza.BazaDanych;
 import com.myproject.stacja.kontroli.input.DostawcaDanychWejsciowychUzytkownika;
 import com.myproject.stacja.kontroli.logika.Kontroler;
 

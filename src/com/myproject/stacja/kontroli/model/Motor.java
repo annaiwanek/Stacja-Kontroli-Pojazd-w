@@ -1,4 +1,4 @@
-package com.myproject.stacja.kontroli.pojazdy;
+package com.myproject.stacja.kontroli.model;
 
 public class Motor extends Pojazd {
 
@@ -8,5 +8,4 @@ public class Motor extends Pojazd {
         setKategoria(KategoriaPojazdu.A);
 
     }
-
 }

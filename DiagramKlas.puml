@@ -1,0 +1,113 @@
+@startuml
+enum com.myproject.stacja.kontroli.model.TypPojazdu {
++  MOTOR
++  SAMOCHOD_OSOBOWY
++  AUTOBUS
++  SAMOCHOD_DOSTAWCZY
++  SAMOCHOD_CIEZAROWY
++  CIAGNIK_ROLNICZY
+}
+class com.myproject.stacja.kontroli.model.SamochodCiezarowy {
+}
+class com.myproject.stacja.kontroli.model.BadanieTechniczne {
+- int idBadania
+- Pojazd pojazd
+- LocalDate dataBadania
++ Pojazd getPojazd()
++ int getIdBadania()
++ String toString()
+}
+class com.myproject.stacja.kontroli.model.SamochodOsobowy {
+}
+class com.myproject.stacja.kontroli.model.SamochodDostawczy {
+}
+enum com.myproject.stacja.kontroli.model.KategoriaPojazdu {
++  A
++  B
++  C
++  CC
++  D
++  T
++  E
+}
+class com.myproject.stacja.kontroli.input.DostawcaDanychWejsciowychUzytkownika {
+- Scanner scanner
++ int pobierzInt()
++ String wprowadzTekst()
++ long pobierzLong()
+}
+abstract class com.myproject.stacja.kontroli.model.Pojazd {
+- DostawcaDanychWejsciowychUzytkownika dostawcaDanych
+- String numerDowoduRejestracyjnego
+- String numerRejestracyjny
+- String marka
+- String model
+- TypPojazdu typ
+- int rokProdukcji
+- KategoriaPojazdu kategoria
+- long przebieg
++ Pojazd stworzPojazd()
++ void wypelnijNrDowodu()
++ void wypelnijNrRejestracyjny()
++ void wypelnijMarkePojazdu()
++ void wypelnijModelPojazdu()
++ void wypelnijRokProdukcji()
++ void wypelnijPrzebieg()
++ String getNumerDowoduRejestracyjnego()
++ String getNumerRejestracyjny()
++ String getMarka()
++ TypPojazdu getTyp()
++ String getModel()
++ int getRokProdukcji()
++ KategoriaPojazdu getKategoria()
++ long getPrzebieg()
++ void setNumerDowoduRejestracyjnego(String)
++ void setNumerRejestracyjny(String)
++ void setMarka(String)
++ void setTyp(TypPojazdu)
++ void setModel(String)
++ void setRokProdukcji(int)
++ void setKategoria(KategoriaPojazdu)
++ void setPrzebieg(long)
++ String toString()
+}
+class com.myproject.stacja.kontroli.model.CiagnikRolniczy {
+}
+class com.myproject.stacja.kontroli.logika.Kontroler {
++ {static} int MAX_ID
+- BazaDanych bazaDanych
+- DostawcaDanychWejsciowychUzytkownika userImput
++ void dodajBadanie()
++ void aktualizujBadanie()
++ void wyszukajBadanie()
++ void usunBadanie()
+- BadanieTechniczne aktualizujPola(BadanieTechniczne)
+- boolean sprawdzIwyswietlBadania(String)
+- Pojazd pobierzTypPojazdu()
+}
+class com.myproject.stacja.kontroli.model.Autobus {
+}
+class com.myproject.stacja.kontroli.baza.BazaDanych {
++ {static} String PLIK_BAZA_BADAN_TECHNICZNYCH
+- Map<String,List<BadanieTechniczne>> badaniaTechniczne
++ void dodajBadanie(BadanieTechniczne)
++ List<BadanieTechniczne> znajdzBadania(String)
++ BadanieTechniczne znajdzBadania(String,int)
++ void aktualizujBadanie(String,int,BadanieTechniczne)
++ void usunBadanie(String,int)
+- void zapiszDoPliku()
+- void odczytajZPliku()
+}
+class com.myproject.stacja.kontroli.model.Motor {
+}
+
+
+com.myproject.stacja.kontroli.model.Pojazd <|-- com.myproject.stacja.kontroli.model.SamochodCiezarowy
+java.io.Serializable <|.. com.myproject.stacja.kontroli.model.BadanieTechniczne
+com.myproject.stacja.kontroli.model.Pojazd <|-- com.myproject.stacja.kontroli.model.SamochodOsobowy
+com.myproject.stacja.kontroli.model.Pojazd <|-- com.myproject.stacja.kontroli.model.SamochodDostawczy
+java.io.Serializable <|.. com.myproject.stacja.kontroli.model.Pojazd
+com.myproject.stacja.kontroli.model.Pojazd <|-- com.myproject.stacja.kontroli.model.CiagnikRolniczy
+com.myproject.stacja.kontroli.model.Pojazd <|-- com.myproject.stacja.kontroli.model.Autobus
+com.myproject.stacja.kontroli.model.Pojazd <|-- com.myproject.stacja.kontroli.model.Motor
+@enduml

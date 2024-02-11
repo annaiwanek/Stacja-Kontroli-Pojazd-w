@@ -1,11 +1,12 @@
-package com.myproject.stacja.kontroli.pojazdy;
+package com.myproject.stacja.kontroli.model;
 
 import com.myproject.stacja.kontroli.input.DostawcaDanychWejsciowychUzytkownika;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract class Pojazd {
-    private final DostawcaDanychWejsciowychUzytkownika dostawcaDanych = new DostawcaDanychWejsciowychUzytkownika();
+public abstract class Pojazd implements Serializable {
+    private final transient DostawcaDanychWejsciowychUzytkownika dostawcaDanych = new DostawcaDanychWejsciowychUzytkownika();
     private String numerDowoduRejestracyjnego;
     private String numerRejestracyjny;
     private String marka;
@@ -14,21 +15,6 @@ public abstract class Pojazd {
     private int rokProdukcji;
     private KategoriaPojazdu kategoria;
     private long przebieg;
-
-    public Pojazd() {
-    }
-
-    public Pojazd(String numerDowoduRejestracyjnego, String numerRejestracyjny, String marka, String model, TypPojazdu typ,
-                  KategoriaPojazdu kategoria, int rokProdukcji, long przebieg) {
-        this.numerDowoduRejestracyjnego = numerDowoduRejestracyjnego;
-        this.numerRejestracyjny = numerRejestracyjny;
-        this.marka = marka;
-        this.typ = typ;
-        this.model = model;
-        this.rokProdukcji = rokProdukcji;
-        this.kategoria = kategoria;
-        this.przebieg = przebieg;
-    }
 
     public Pojazd stworzPojazd() {
         wypelnijNrDowodu();
@@ -47,35 +33,40 @@ public abstract class Pojazd {
         String numerDowoduRejestracyjnego = dostawcaDanych.wprowadzTekst();
         setNumerDowoduRejestracyjnego(numerDowoduRejestracyjnego);
     }
+
     public void wypelnijNrRejestracyjny() {
         System.out.println("Wprowadź numer rejestracyjny: ");
         String numerRejestracyjny = dostawcaDanych.wprowadzTekst();
         setNumerRejestracyjny(numerRejestracyjny);
     }
+
     public void wypelnijMarkePojazdu() {
         System.out.println("Wprowadź markę pojazdu: ");
         String marka = dostawcaDanych.wprowadzTekst();
         setMarka(marka);
     }
+
     public void wypelnijModelPojazdu() {
         System.out.println("Wprowadź model pojazdu: ");
         String model = dostawcaDanych.wprowadzTekst();
         setModel(model);
     }
+
     public void wypelnijRokProdukcji() {
         boolean poprawnyRok = false;
         do {
             System.out.println("Wprowadź rok produkcji (od 1950): ");
             int rokProdukcji = dostawcaDanych.pobierzInt();
 
-            if(rokProdukcji >= 1950 && rokProdukcji <= LocalDate.now().getYear()) {
+            if (rokProdukcji >= 1950 && rokProdukcji <= LocalDate.now().getYear()) {
                 setRokProdukcji(rokProdukcji);
                 poprawnyRok = true;
             } else {
                 System.out.println("Niepoprawny rok produkcji. Wprowadź prawidłową wartość");
             }
-        } while(!poprawnyRok);
+        } while (!poprawnyRok);
     }
+
     public void wypelnijPrzebieg() {
         System.out.println("Wprowadź przebieg pojazdu: ");
         long przebieg = dostawcaDanych.pobierzLong();

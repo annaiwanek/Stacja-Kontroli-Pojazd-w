@@ -1,4 +1,4 @@
-package com.myproject.stacja.kontroli.pojazdy;
+package com.myproject.stacja.kontroli.model;
 
 public class SamochodDostawczy extends Pojazd{
 
@@ -7,7 +7,4 @@ public class SamochodDostawczy extends Pojazd{
         setTyp(TypPojazdu.SAMOCHOD_DOSTAWCZY);
         setKategoria(KategoriaPojazdu.B);
     }
-
-
-
 }

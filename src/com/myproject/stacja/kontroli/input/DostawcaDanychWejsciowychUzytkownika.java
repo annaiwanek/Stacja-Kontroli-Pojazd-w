@@ -7,7 +7,7 @@ import java.util.Scanner;
 //reużywalność kodu - w tej klasie będą metody, które mogą być używane w innych klasach
 //klasa pomocnicza
 public class DostawcaDanychWejsciowychUzytkownika {
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
     /**
      * metoda, która pobiera od użytkownika int
@@ -20,12 +20,12 @@ public class DostawcaDanychWejsciowychUzytkownika {
         while (shouldContinue) {
             try {
                 int userChoice = scanner.nextInt();
-                scanner.nextLine(); // Odczyt dodatkowego znaku nowej linii
+                scanner.nextLine();
                 wybranaWartosc = userChoice;
                 shouldContinue = false;
             } catch (InputMismatchException e) {
                 System.out.println("Wprowadzono niepoprawny format danych. Spróbuj ponownie.");
-                scanner.nextLine(); // Odczyt dodatkowego znaku nowej linii
+                scanner.nextLine();
             }
         }
         return wybranaWartosc;
@@ -51,8 +51,6 @@ public class DostawcaDanychWejsciowychUzytkownika {
         }
         return wybranaWartosc;
     }
-
-
 }
 
 
