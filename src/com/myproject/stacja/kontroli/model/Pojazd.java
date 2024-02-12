@@ -5,7 +5,15 @@ import com.myproject.stacja.kontroli.input.DostawcaDanychWejsciowychUzytkownika;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+/*Serializacja to proces konwersji obiektu na strumień bajtów, co umożliwia zapisanie obiektu do pliku
+lub przesłanie go przez sieć do innego systemu.
+ */
 public abstract class Pojazd implements Serializable {
+
+    /*transient: Modyfikator używany w kontekście serializacji obiektów.
+    Pola oznaczone jako transient są pomijane podczas serializacji obiektu, co oznacza,
+    że ich wartości nie są zapisywane do strumienia bajtów podczas serializacji.
+     */
     private final transient DostawcaDanychWejsciowychUzytkownika dostawcaDanych = new DostawcaDanychWejsciowychUzytkownika();
     private String numerDowoduRejestracyjnego;
     private String numerRejestracyjny;
@@ -15,6 +23,11 @@ public abstract class Pojazd implements Serializable {
     private int rokProdukcji;
     private KategoriaPojazdu kategoria;
     private long przebieg;
+
+    /* Poniższe metody pozwalają na interaktywne wypełnianie informacji o pojeździe przez użytkownika.
+    Każda z tych metod wyświetla monit, pobiera dane od użytkownika za pośrednictwem instancji
+    DostawcaDanychWejsciowychUzytkownika i przypisuje te dane do odpowiednich pól w klasie.
+     */
 
     public Pojazd stworzPojazd() {
         wypelnijNrDowodu();
@@ -28,6 +41,7 @@ public abstract class Pojazd implements Serializable {
 
     }
 
+    // Metody getter i setter pozwalają na odczytywanie i ustawianie wartości pól klasy z zewnątrz.
     public void wypelnijNrDowodu() {
         System.out.println("Wprowadź numer dowodu rejestracyjnego: ");
         String numerDowoduRejestracyjnego = dostawcaDanych.wprowadzTekst();
@@ -140,7 +154,13 @@ public abstract class Pojazd implements Serializable {
         this.przebieg = przebieg;
     }
 
+    /* @Override to adnotacja w Javie, która jest używana nad metodą, aby zaznaczyć,
+    że ta metoda przesłania metodę z klasy bazowej.
+     */
     @Override
+      /* Nadpisana metoda toString zwraca łańcuch reprezentujący instancję Pojazd,
+    zawierający wszystkie ważne informacje o pojeździe.
+     */
     public String toString() {
         return
                 "\na) nr dowodu rejestracyjnego: " + numerDowoduRejestracyjnego +

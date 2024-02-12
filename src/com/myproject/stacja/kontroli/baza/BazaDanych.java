@@ -6,8 +6,21 @@ import java.io.*;
 import java.util.*;
 
 public class BazaDanych {
+
+    /*
+    Definiowanie stałej PLIK_BAZA_BADAN_TECHNICZNYCH, która przechowuje nazwę pliku,
+    w którym będą zapisywane dane.
+     */
     public static final String PLIK_BAZA_BADAN_TECHNICZNYCH = "Baza_badań_technicznych";
+
+    /* Inicjalizacja mapy badaniaTechniczne, która przechowuje listy badań technicznych
+    (List<BadanieTechniczne>) skojarzone z numerami rejestracyjnymi pojazdów (String) jako klucze.
+     */
     private Map<String, List<BadanieTechniczne>> badaniaTechniczne = new HashMap<>();
+
+    /* Konstruktor klasy BazaDanych, który przy tworzeniu instancji klasy
+    od razu próbuje odczytać dane z pliku za pomocą metody odczytajZPliku().
+     */
 
     public BazaDanych() {
         odczytajZPliku();

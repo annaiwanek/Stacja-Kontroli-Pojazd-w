@@ -16,7 +16,7 @@ public class DostawcaDanychWejsciowychUzytkownika {
      */
     public int pobierzInt() {
         boolean shouldContinue = true;
-        int wybranaWartosc = 0;
+        int wybranaWartosc = 0; // ustawienie wartosci poczatkowej
         while (shouldContinue) {
             try {
                 int userChoice = scanner.nextInt();

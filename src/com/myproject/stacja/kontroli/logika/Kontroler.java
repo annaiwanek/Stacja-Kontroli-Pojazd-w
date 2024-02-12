@@ -10,12 +10,12 @@ import java.util.Random;
 
 public class Kontroler {
     public static final int MAX_ID = 5000;
-    private final BazaDanych bazaDanych;
+    private final BazaDanych bazaDanych; // final, bo pole typu BazaDanych musi być zainicjalizowane, czyli musi być wpisana jakaś wartość
     private final DostawcaDanychWejsciowychUzytkownika userImput;
 
-    public Kontroler(BazaDanych bazaDanych) {
-        this.bazaDanych = bazaDanych;
-        this.userImput = new DostawcaDanychWejsciowychUzytkownika();
+    public Kontroler(BazaDanych bazaDanych) { //konstruktor klasy Kontroler
+        this.bazaDanych = bazaDanych; //zainicjalizowanie pola bazaDanych typu BazaDanch
+        this.userImput = new DostawcaDanychWejsciowychUzytkownika(); //inicjalizacja pola userImput
     }
 
     public void dodajBadanie() {
@@ -25,11 +25,11 @@ public class Kontroler {
 
         Pojazd pojazd = pobierzTypPojazdu();
         if (pojazd == null) {
-            return;
+            return; //powracanie do menu głownego, wyjscie z metody dodajBadanie
         }
 
-        BadanieTechniczne badanieTechniczne = new BadanieTechniczne(new Random().nextInt(MAX_ID), pojazd, LocalDate.now());
-        bazaDanych.dodajBadanie(badanieTechniczne);
+        BadanieTechniczne badanieTechniczne = new BadanieTechniczne(new Random().nextInt(MAX_ID), pojazd, LocalDate.now()); //klasa Random
+        bazaDanych.dodajBadanie(badanieTechniczne); //na obiekcie typu BazaDanych wykonujemy metode dodajBadanie i przekazujemy wczesniej utworzone badanieTechniczne
         System.out.println("Dodano nowe badanie!");
         System.out.println(badanieTechniczne);
     }
@@ -74,8 +74,8 @@ public class Kontroler {
         System.out.println("Wprowadź nr tablicy rejestracyjnej: ");
         String numerRejestracyjny = userImput.wprowadzTekst();
 
-        List<BadanieTechniczne> badanieTechniczne = bazaDanych.znajdzBadania(numerRejestracyjny);
-        System.out.println("Badanie Techniczne" + badanieTechniczne);
+        List<BadanieTechniczne> badaniaTechniczne = bazaDanych.znajdzBadania(numerRejestracyjny);
+        System.out.println("Badania Techniczne" + badaniaTechniczne);
 
         System.out.println("Wprowadź id badania: ");
         int id = userImput.pobierzInt();

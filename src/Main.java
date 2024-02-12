@@ -1,17 +1,17 @@
-import com.myproject.stacja.kontroli.baza.BazaDanych;
+import com.myproject.stacja.kontroli.baza.BazaDanych; //ścieżka do klasy
 import com.myproject.stacja.kontroli.input.DostawcaDanychWejsciowychUzytkownika;
 import com.myproject.stacja.kontroli.logika.Kontroler;
 
 public class Main {
     public static void main(String[] args) {
-        DostawcaDanychWejsciowychUzytkownika userImput = new DostawcaDanychWejsciowychUzytkownika();
+        DostawcaDanychWejsciowychUzytkownika userImput = new DostawcaDanychWejsciowychUzytkownika(); // stworzenie obiektu, userImput to nazwa obiektu
         System.out.println("Projekt zaliczeniowy");
         System.out.println();
         System.out.println("STACJA KONTROLI POJAZDÓW");
         System.out.println();
 
-        BazaDanych bazaDanych = new BazaDanych();
-        Kontroler kontroler = new Kontroler(bazaDanych);
+        BazaDanych bazaDanych = new BazaDanych(); // jeśli nie ma importu należy dać całą ścieżkę do klasy zamiast Baza danych: com.myproject.stacja.kontroli.baza.BazaDanych
+        Kontroler kontroler = new Kontroler(bazaDanych); // wywołanie konstruktora z parametrem
 
         boolean shouldContinue = true;
 
@@ -23,7 +23,7 @@ public class Main {
             System.out.println("4. Usuń badanie.");
             System.out.println("5. Wyjdź.");
 
-            int userChoice = userImput.pobierzInt();
+            int userChoice = userImput.pobierzInt(); // na obiekcie userImput wywołujemy metodę pobierzInt bez parametru
 
             switch (userChoice) {
                 case 1 -> kontroler.dodajBadanie();
